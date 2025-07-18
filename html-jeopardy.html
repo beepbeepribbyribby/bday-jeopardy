@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeopardy!</title>
+
+    <!--game board creation-->
+    <script type="text/javascript">
+
+        //store for all the questions and answers
+        const gameData = {
+            "Science1": {
+                "100": { question: "What is the chemical symbol for water?", answer: "H2O" },
+                "200": { question: "What planet is known as the Red Planet?", answer: "Mars" },
+                "300": { question: "What is the powerhouse of the cell?", answer: "Mitochondria" },
+                "400": { question: "What is the speed of light?", answer: "299,792 km/s" },
+                "500": { question: "What is the most abundant gas in Earth's atmosphere?", answer: "Nitrogen" }
+            },
+            "Science2": {
+                "100": { question: "What is the chemical symbol for water?", answer: "H2O" },
+                "200": { question: "What planet is known as the Red Planet?", answer: "Mars" },
+                "300": { question: "What is the powerhouse of the cell?", answer: "Mitochondria" },
+                "400": { question: "What is the speed of light?", answer: "299,792 km/s" },
+                "500": { question: "What is the most abundant gas in Earth's atmosphere?", answer: "Nitrogen" }
+            },
+            "Science3": {
+                "100": { question: "What is the chemical symbol for water?", answer: "H2O" },
+                "200": { question: "What planet is known as the Red Planet?", answer: "Mars" },
+                "300": { question: "What is the powerhouse of the cell?", answer: "Mitochondria" },
+                "400": { question: "What is the speed of light?", answer: "299,792 km/s" },
+                "500": { question: "What is the most abundant gas in Earth's atmosphere?", answer: "Nitrogen" }
+            },
+            "Science4": {
+                "100": { question: "What is the chemical symbol for water?", answer: "H2O" },
+                "200": { question: "What planet is known as the Red Planet?", answer: "Mars" },
+                "300": { question: "What is the powerhouse of the cell?", answer: "Mitochondria" },
+                "400": { question: "What is the speed of light?", answer: "299,792 km/s" },
+                "500": { question: "What is the most abundant gas in Earth's atmosphere?", answer: "Nitrogen" }
+            },
+            "Science5": {
+                "100": { question: "What is the chemical symbol for water?", answer: "H2O" },
+                "200": { question: "What planet is known as the Red Planet?", answer: "Mars" },
+                "300": { question: "What is the powerhouse of the cell?", answer: "Mitochondria" },
+                "400": { question: "What is the speed of light?", answer: "299,792 km/s" },
+                "500": { question: "What is the most abundant gas in Earth's atmosphere?", answer: "Nitrogen" }
+            },
+            // Additional categories and questions can be added here
+        };
+
+        // Function to create the game board
+        function createGameBoard() {
+            const gameBoard = document.getElementById("game-board");
+            const categories = Object.keys(gameData);
+            const pointValues = ["100", "200", "300", "400", "500"];
+
+            // Create categories row
+            const headerRow = document.createElement("div");
+            headerRow.className = "row";
+            gameBoard.appendChild(headerRow);
+
+            // Add header cells for each category
+            for (const category of categories) {
+                const headerCell = document.createElement("div");
+                headerCell.className = "header-cell";
+                headerCell.textContent = category;
+                headerRow.appendChild(headerCell);
+            }
+
+            // Create a row for each point value
+            for (const points of pointValues) {
+                const pointRow = document.createElement("div");
+                pointRow.className = "row";
+                gameBoard.appendChild(pointRow);
+
+                // Add question cells for each category at this point value
+                for (const category of categories) {
+                    if (gameData[category][points]) {
+                        const questionCell = document.createElement("div");
+                        questionCell.className = "question-cell";
+                        questionCell.textContent = points;
+                        questionCell.onclick = function () {
+                            //call a function to handle the question click
+                            showQuestionAnswerModal(category, points);
+                        };
+                        pointRow.appendChild(questionCell);
+                    } else {
+                        // If no question exists for this category/point value, create an empty cell
+                        const emptyCell = document.createElement("div");
+                        emptyCell.className = "question-cell empty";
+                        pointRow.appendChild(emptyCell);
+                    }
+                }
+            }
+        }
+        // Call the function to create the game board when the document is loaded
+        document.addEventListener("DOMContentLoaded", createGameBoard);
+    </script>
+
+
+    <!-- Modal for showing question and answer -->
+    <script type="text/javascript">
+        function showQuestionAnswerModal(category, points) {
+            const question = gameData[category][points].question;
+            const answer = gameData[category][points].answer;
+            const modalContent = `
+                <div style="background-color: #060ce9; padding: 20px; border-radius: 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 90%; height: 90%;">
+                    <div class="inner-modal">
+                    <!--<h2>${category} - ${points} Points</h2>-->
+                    <p class="modal-question">${question}</p>
+                    <p class="answer" style="display:none;"><strong>Answer:</strong> ${answer}</p>
+                    <button onclick="showAnswer()">Show Answer</button>
+                    <button onclick="closeModal()">Close</button>
+                    </div>
+                </div>
+            `;
+            const modalOverlay = document.createElement("div");
+            modalOverlay.style.position = "fixed";
+            modalOverlay.style.top = "0";
+            modalOverlay.style.left = "0";
+            modalOverlay.style.width = "100%";
+            modalOverlay.style.height = "100%";
+
+            // Center the modal
+            modalOverlay.style.display = "flex";
+            modalOverlay.style.justifyContent = "center";
+            modalOverlay.style.alignItems = "center";
+            modalOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+            modalOverlay.innerHTML = modalContent;
+            document.body.appendChild(modalOverlay);
+        }
+
+        function closeModal() {
+            const modalOverlay = document.querySelector("div[style*='position: fixed']");
+            if (modalOverlay) {
+                document.body.removeChild(modalOverlay);
+            }
+        }
+
+        function showAnswer() {
+            const answerElement = document.querySelector(".answer");
+            if (answerElement) {
+                answerElement.style.display = "block";
+            }
+        }
+
+    </script>
+
+
+
+    <!-- Styles for the game board -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #cccccc;
+            color: #333;
+            text-align: center;
+        }
+
+        h1 {
+            color: #115ff4;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        #game-board {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .row {
+            display: flex;
+            width: 100%;
+        }
+
+        .header-cell {
+            flex: 1;
+            background-color: #060ce9;
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .question-cell {
+            flex: 1;
+            background-color: #115ff4;
+            color: white;
+            padding: 20px;
+            margin: 5px;
+            border: 1px solid #aaaaaa;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .question-cell:hover {
+            background-color: #2871ff;
+        }
+
+        #game-board {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .row {
+            display: flex;
+            width: 100%;
+            margin-bottom: 5px;
+        }
+
+        .header-cell,
+        .question-cell {
+            flex: 1;
+            min-width: 0;
+            word-wrap: break-word;
+        }
+
+        .question-cell {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80px;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .empty {
+            background-color: #bbbbbb;
+            cursor: default;
+        }
+
+        .modal-question {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        .answer {
+            font-size: 2em;
+            color: #ffffff;
+            margin-top: 20px;
+        }
+        .inner-modal {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;   
+            align-items: center;
+            height: 100%;
+        }
+        
+        button {
+            background-color: #aaaaaa;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #115ff4;
+        }
+        
+        @media (max-width: 768px) {
+            .question-cell {
+                padding: 10px;
+                height: 60px;
+                font-size: 1em;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Jeopardy! Game Board -->
+    <h1>Jeopardy!</h1>
+    <div id="game-board">
+    </div>
+
+</body>
+
+</html>
