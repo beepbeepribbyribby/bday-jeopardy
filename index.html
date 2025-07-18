@@ -9,14 +9,18 @@
     <!--game board creation-->
     <script type="text/javascript">
 
+        let currentCell = null;
+        let currentPoints = 0;
+        let score = 0;
+
         //store for all the questions and answers
         const gameData = {
-            "Science1": {
-                "100": { question: "What is the chemical symbol for water?", answer: "H2O" },
-                "200": { question: "What planet is known as the Red Planet?", answer: "Mars" },
-                "300": { question: "What is the powerhouse of the cell?", answer: "Mitochondria" },
-                "400": { question: "What is the speed of light?", answer: "299,792 km/s" },
-                "500": { question: "What is the most abundant gas in Earth's atmosphere?", answer: "Nitrogen" }
+            "Famous Lynns": {
+                "100": { question: "He began his music career in bands like Andicaps and the Chads, but ended up huge success out of the blue", answer: "Who is Jeff Lynne?" },
+                "200": { question: "This “Coal Miner’s Daughter” singer released 50 studio albums and was nominated for 18 Grammys winning 3", answer: "Who is Loretta Lynn?" },
+                "300": { question: "This Lynn was a 4 time Super Bowl champion as a wide receiver for the Pittsburgh Steelers playing from 1974-1982", answer: "Who is Lynn Swann?" },
+                "400": { question: "This songwriter, actor, filmmaker and rapper is one Oscar win away from holding EGOT status", answer: "Who is Lin-Manuel Miranda?" },
+                "500": { question: "This English-American actress, who appeared in films like \"Georgy Girl\" and \"Shine,\" was part of the Redgrave acting dynasty and known as Lynn Redgrave", answer: "Who is Lynn Redgrave?" }
             },
             "Science2": {
                 "100": { question: "What is the chemical symbol for water?", answer: "H2O" },
@@ -51,6 +55,7 @@
 
         // Function to create the game board
         function createGameBoard() {
+
             const gameBoard = document.getElementById("game-board");
             const categories = Object.keys(gameData);
             const pointValues = ["100", "200", "300", "400", "500"];
@@ -96,12 +101,19 @@
         }
         // Call the function to create the game board when the document is loaded
         document.addEventListener("DOMContentLoaded", createGameBoard);
+        document.addEventListener("DOMContentLoaded", function () {
+            createGameBoard();
+            document.getElementById('score').textContent = '0';
+        });
     </script>
 
 
     <!-- Modal for showing question and answer -->
     <script type="text/javascript">
+
         function showQuestionAnswerModal(category, points) {
+            currentCell = event.currentTarget;
+            currentPoints = parseInt(points); // Store the points value
             const question = gameData[category][points].question;
             const answer = gameData[category][points].answer;
             const modalContent = `
@@ -111,7 +123,10 @@
                     <p class="modal-question">${question}</p>
                     <p class="answer" style="display:none;"><strong>Answer:</strong> ${answer}</p>
                     <button onclick="showAnswer()">Show Answer</button>
-                    <button onclick="closeModal()">Close</button>
+                    <div style="margin-top: 20px;">
+                        <button class="correct-btn" onclick="answerCorrect()">Correct (+${points})</button>
+                        <button class="incorrect-btn" onclick="answerIncorrect()">Incorrect (-${points})</button>
+                    </div>
                     </div>
                 </div>
             `;
@@ -136,6 +151,14 @@
             if (modalOverlay) {
                 document.body.removeChild(modalOverlay);
             }
+
+            // Change the appearance of the cell that was clicked
+            if (currentCell) {
+                currentCell.style.backgroundColor = "#666666"; // Darker gray to indicate "used"
+                currentCell.style.cursor = "default"; // Remove pointer cursor
+                currentCell.onclick = null; // Remove click handler so it can't be clicked again
+            }
+
         }
 
         function showAnswer() {
@@ -144,7 +167,19 @@
                 answerElement.style.display = "block";
             }
         }
+        function answerCorrect() {
+            updateScore(currentPoints);
+            closeModal();
+        }
 
+        function answerIncorrect() {
+            updateScore(-currentPoints);
+            closeModal();
+        }
+        function updateScore(points) {
+            score += points;
+            document.getElementById('score').textContent = score;
+        }
     </script>
 
 
@@ -240,19 +275,21 @@
             color: #ffffff;
             font-weight: bold;
         }
+
         .answer {
             font-size: 2em;
             color: #ffffff;
             margin-top: 20px;
         }
+
         .inner-modal {
             display: flex;
             flex-direction: column;
-            justify-content: center;   
+            justify-content: center;
             align-items: center;
             height: 100%;
         }
-        
+
         button {
             background-color: #aaaaaa;
             color: white;
@@ -262,16 +299,48 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        
+
         button:hover {
             background-color: #115ff4;
         }
-        
+
+        .question-cell.answered {
+            background-color: #666666;
+            cursor: default;
+        }
+
+        #score-display {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #115ff4;
+        }
+
+        .correct-btn {
+            background-color: #28a745 !important;
+        }
+
+        .incorrect-btn {
+            background-color: #dc3545 !important;
+        }
+
+        .correct-btn:hover,
+        .incorrect-btn:hover {
+            opacity: 0.9;
+        }
+
         @media (max-width: 768px) {
             .question-cell {
                 padding: 10px;
                 height: 60px;
                 font-size: 1em;
+            }
+
+            .modal-question {
+                font-size: 2em;
+                margin-bottom: 20px;
+                color: #ffffff;
+                font-weight: bold;
             }
         }
     </style>
@@ -282,6 +351,8 @@
 
     <!-- Jeopardy! Game Board -->
     <h1>Jeopardy!</h1>
+    <div id="score-display">Score: <span id="score">0</span></div>
+
     <div id="game-board">
     </div>
 
