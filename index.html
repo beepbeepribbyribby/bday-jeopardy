@@ -59,7 +59,6 @@
 
         // Function to create the game board
         function createGameBoard() {
-
             const gameBoard = document.getElementById("game-board");
             const categoryOrder = [
                 "1960",
@@ -79,11 +78,15 @@
             // Add header cells for each category in the specified order
             for (const category of categoryOrder) {
                 const headerCell = document.createElement("div");
-                headerCell.className = "header-cell";
-                headerCell.textContent = category;
+                headerCell.className = "header-cell hidden-category";
+                // Store the category name in a data attribute instead of text content
+                headerCell.dataset.category = category;
+                headerCell.textContent = "?"; // Show a question mark initially
+                headerCell.onclick = function () {
+                    revealCategory(this);
+                };
                 headerRow.appendChild(headerCell);
             }
-
 
             // Create a row for each point value
             for (const points of pointValues) {
@@ -96,9 +99,9 @@
                     if (gameData[category] && gameData[category][points]) {
                         const questionCell = document.createElement("div");
                         questionCell.className = "question-cell";
-                        questionCell.textContent = points;
+                        // Store the points but don't display yet
+                        questionCell.dataset.pointValue = points;
                         questionCell.onclick = function () {
-                            //call a function to handle the question click
                             showQuestionAnswerModal(category, points);
                         };
                         pointRow.appendChild(questionCell);
@@ -110,7 +113,43 @@
                     }
                 }
             }
+
+            // After creating the board, animate the question cells
+            setTimeout(animateQuestionCells, 500);
         }
+
+
+        // Function to animate question cells with random timing
+        function animateQuestionCells() {
+            // Get all question cells that aren't empty
+            const questionCells = document.querySelectorAll('.question-cell:not(.empty)');
+
+            // Reveal each cell's text at a random time within 5 seconds
+            questionCells.forEach(cell => {
+                const randomDelay = Math.random() * 5000; // Random delay up to 5 seconds
+                setTimeout(() => {
+                    // Set text content from data attribute
+                    cell.textContent = cell.dataset.pointValue;
+                    cell.classList.add('fade-in');
+                }, randomDelay);
+            });
+        }
+
+        function revealCategory(headerCell) {
+            // Get the category name from the data attribute
+            const category = headerCell.dataset.category;
+
+            // Replace the question mark with the actual category name
+            headerCell.textContent = category;
+
+            // Add a class to show it's been revealed
+            headerCell.classList.remove('hidden-category');
+            headerCell.classList.add('revealed-category');
+
+            // Remove the click handler so it can't be clicked again
+            headerCell.onclick = null;
+        }
+
         // Call the function to create the game board when the document is loaded
         document.addEventListener("DOMContentLoaded", function () {
             createGameBoard();
@@ -420,6 +459,45 @@
             display: flex;
             flex-direction: row;
             gap: 20px;
+        }
+
+        .question-cell.fade-in {
+            animation: fadeIn 0.5s forwards;
+        }
+
+        .header-cell.hidden-category {
+            cursor: pointer;
+            background-color: #0d47a1;
+            /* Darker blue for hidden categories */
+        }
+
+        .header-cell.hidden-category:hover {
+            background-color: #1565c0;
+            /* Slightly lighter on hover */
+        }
+
+        .header-cell.revealed-category {
+            animation: revealCategory 0.5s forwards;
+        }
+
+        @keyframes revealCategory {
+            from {
+                background-color: #0d47a1;
+            }
+
+            to {
+                background-color: #115ff4;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                color: transparent;
+            }
+
+            to {
+                color: gold;
+            }
         }
 
         @media (max-width: 768px) {

@@ -42,8 +42,13 @@
             // Add header cells for each category in the specified order
             for (const category of categoryOrder) {
                 const headerCell = document.createElement("div");
-                headerCell.className = "header-cell";
-                headerCell.textContent = category;
+                headerCell.className = "header-cell hidden-category";
+                // Store the category name in a data attribute instead of text content
+                headerCell.dataset.category = category;
+                headerCell.textContent = "?"; // Show a question mark initially
+                headerCell.onclick = function() {
+                    revealCategory(this);
+                };
                 headerRow.appendChild(headerCell);
             }
 
@@ -74,6 +79,22 @@
                 }
             }
         }
+
+        function revealCategory(headerCell) {
+            // Get the category name from the data attribute
+            const category = headerCell.dataset.category;
+
+            // Replace the question mark with the actual category name
+            headerCell.textContent = category;
+
+            // Add a class to show it's been revealed
+            headerCell.classList.remove('hidden-category');
+            headerCell.classList.add('revealed-category');
+
+            // Remove the click handler so it can't be clicked again
+            headerCell.onclick = null;
+        }
+
         // Call the function to create the game board when the document is loaded
         document.addEventListener("DOMContentLoaded", function () {
             createGameBoard();
@@ -383,6 +404,31 @@
             display: flex;
             flex-direction: row;
             gap: 20px;
+        }
+
+        .header-cell.hidden-category {
+            cursor: pointer;
+            background-color: #0d47a1;
+            /* Darker blue for hidden categories */
+        }
+
+        .header-cell.hidden-category:hover {
+            background-color: #1565c0;
+            /* Slightly lighter on hover */
+        }
+
+        .header-cell.revealed-category {
+            animation: revealCategory 0.5s forwards;
+        }
+
+        @keyframes revealCategory {
+            from {
+                background-color: #0d47a1;
+            }
+
+            to {
+                background-color: #115ff4;
+            }
         }
 
         @media (max-width: 768px) {
