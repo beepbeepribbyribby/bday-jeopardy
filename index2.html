@@ -127,7 +127,7 @@
 
             // Reveal each cell's text at a random time within 5 seconds
             questionCells.forEach(cell => {
-                const randomDelay = Math.random() * 5000; // Random delay up to 5 seconds
+                const randomDelay = Math.random() * 3000; // Random delay up to 3 seconds
                 setTimeout(() => {
                     // Set text content from data attribute
                     cell.textContent = cell.dataset.pointValue;
