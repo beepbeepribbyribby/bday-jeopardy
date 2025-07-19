@@ -27,32 +27,32 @@
                 "500": { question: "This English-American actress, who appeared in films like \"Georgy Girl\" and \"Shine,\" was once called stupid by Alex Trebek on Celebrity Jeopardy!", answer: "Who is Lynn Redgrave?<br><a target=\"_blank\" class=\"answer-link\" href=\"https://www.youtube.com/watch?v=P_KRprPr7t0\">Watch the clip here</a>" }
             },
             "Plants": {
-                "100":  { question: "Not all nuts are nuts! Peanuts aren’t nuts they are", answer: "What are Legumes?" },
+                "100": { question: "Not all nuts are nuts! Peanuts aren’t nuts they are", answer: "What are Legumes?" },
                 "200": { question: "During the 1600’s, Holland had a craze over this flower that was once more valuable than gold", answer: "What is the Tulip?" },
                 "300": { question: "It takes about 4,000 blooms of this plant to produce 1 ounce of this pricey spice from the same name", answer: "What is Saffron?" },
                 "400": { question: "This plant is the native shamans way to teach the people about the universe", answer: "What is Peyote?" },
-                "500": { question: "This plant is the oldest living tree species dating back about 250 million years", answer: "What is the Ginko?" }
+                "500": { question: "This plant is the oldest living tree species dating back about 250 million years", answer: "What is the Ginkgo?" }
             },
-            "Science3": {
-                "100": { question: "What is the chemical symbol for water?", answer: "H2O" },
-                "200": { question: "What planet is known as the Red Planet?", answer: "Mars" },
-                "300": { question: "What is the powerhouse of the cell?", answer: "Mitochondria" },
-                "400": { question: "What is the speed of light?", answer: "299,792 km/s" },
-                "500": { question: "What is the most abundant gas in Earth's atmosphere?", answer: "Nitrogen" }
+            "1960": {
+                "100": { question: "The first televised presidential debate was September 26, 1960 between these two candidates", answer: "Who are Kennedy and Nixon?" },
+                "200": { question: "This actor who played Fox Mulder on The X-Files was born August 7, 1960", answer: "Who is David Duchovny?" },
+                "300": { question: "March 3, 1960 this musician returned home from Germany after 2 years of military service", answer: "Who is Elvis Presley?" },
+                "400": { question: "On May 6, 1960 President Eisenhower signed this to strengthen legislation to protect against discrimination", answer: "What is the Civil Rights Act?" },
+                "500": { question: "The Beatles played their first public performance on August 15, 1960 at this Liverpool venue", answer: "What is the Jacaranda?" }
             },
-            "Science4": {
-                "100": { question: "What is the chemical symbol for water?", answer: "H2O" },
-                "200": { question: "What planet is known as the Red Planet?", answer: "Mars" },
-                "300": { question: "What is the powerhouse of the cell?", answer: "Mitochondria" },
-                "400": { question: "What is the speed of light?", answer: "299,792 km/s" },
-                "500": { question: "What is the most abundant gas in Earth's atmosphere?", answer: "Nitrogen" }
+            "Learning is Fungi": {
+                "100": { question: "<img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Trametes_versicolor_G4_%281%29.JPG/500px-Trametes_versicolor_G4_%281%29.JPG\">Name this not so fowl mushroom", answer: "What is Turkey tail?" },
+                "200": { question: "<img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Amanita_muscaria_3_vliegenzwammen_op_rij.jpg/500px-Amanita_muscaria_3_vliegenzwammen_op_rij.jpg\">Amanita muscaria is commonly associated with this holiday", answer: "What is Christmas?" },
+                "300": { question: "<img src=\"https://upload.wikimedia.org/wikipedia/commons/f/f4/Psilocybe.semilanceata.Alan.jpg\">Liberty Caps contain this psychoactive ingredient making them magic mushrooms", answer: "What is Psilocybin or Psilocin?" },
+                "400": { question: "<img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/ChampignonMushroom.jpg/500px-ChampignonMushroom.jpg\">The most common edible mushrooms in North America are these, but you won't find them on a dress shirt", answer: "What are White Button Mushrooms?" },
+                "500": { question: "<img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Cordyceps.jpg/500px-Cordyceps.jpg\">These fungi are parasitic to insects ", answer: "What are Cordyceps?" },
             },
-            "Science5": {
-                "100": { question: "What is the chemical symbol for water?", answer: "H2O" },
-                "200": { question: "What planet is known as the Red Planet?", answer: "Mars" },
-                "300": { question: "What is the powerhouse of the cell?", answer: "Mitochondria" },
-                "400": { question: "What is the speed of light?", answer: "299,792 km/s" },
-                "500": { question: "What is the most abundant gas in Earth's atmosphere?", answer: "Nitrogen" }
+            "Before and After": {
+                "100": { question: "\"International\" cocoa concoction for female muppet", answer: "What is Swiss Miss Piggy" },
+                "200": { question: "Golf short game practice area served up in the title of a Dr. Seuss book", answer: "What is a putting Green Eggs and Ham?" },
+                "300": { question: "Team rope-pulling contest that becomes a Tolstoy novel", answer: "What is tug-of-War and Peace" },
+                "400": { question: "Folk trio that was \"Blowin' In The Wind\" with the writer of \"Frankenstein\"", answer: "Who is Peter, Paul and Mary Shelley" },
+                "500": { question: "\"Lucille\"-strumming blues guitarist who reigned as a boy king of Egypt", answer: "Who is  B.B. King Tut" }
             },
             // Additional categories and questions can be added here
         };
@@ -124,11 +124,12 @@
                     <div class="inner-modal">
                     <!--<h2>${category} - ${points} Points</h2>-->
                     <p class="modal-question">${question}</p>
-                    <p class="answer" style="display:none;"><strong>Answer:</strong> ${answer}</p>
+                    <p class="answer" style="display:none;">${answer}</p>
                     <button onclick="showAnswer()">Show Answer</button>
                     <div style="margin-top: 20px;">
                         <button class="correct-btn" onclick="answerCorrect()">Correct (+${points})</button>
                         <button class="incorrect-btn" onclick="answerIncorrect()">Incorrect (-${points})</button>
+                        <button class="close-btn" onclick="closeModal()">Close</button>
                     </div>
                     </div>
                 </div>
@@ -161,7 +162,6 @@
             if (currentCell) {
                 currentCell.style.backgroundColor = "#666666"; // Darker gray to indicate "used"
                 currentCell.style.cursor = "default"; // Remove pointer cursor
-                currentCell.onclick = null; // Remove click handler so it can't be clicked again
             }
 
             // Restore body scrolling
@@ -206,6 +206,15 @@
             text-shadow: 2px 2px 0px #000;
             font-size: 3em;
             font-family: "Changa One", cursive;
+            margin: 0;
+        }
+
+        .game-board-title {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
         }
 
         #game-board {
@@ -232,13 +241,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 80px;
+            height: 60px;
             font-weight: bold;
             font-size: 2em;
         }
+
         .answer-link {
             color: gold
         }
+
         .question-cell {
             flex: 1;
             background-color: #115ff4;
@@ -280,7 +291,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 80px;
+            height: 60px;
             font-weight: bold;
             font-size: 1.7em;
             color: gold;
@@ -306,12 +317,22 @@
             margin-top: 20px;
         }
 
+        .modal-question img {
+            width: 100%;
+            display: block;
+            height: auto;
+            margin: 0 auto;
+            aspect-ratio: 1 / 1;
+            max-width: 400px;
+        }
+
         .inner-modal {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100%;
+            margin: 50px 20px;
         }
 
         button {
@@ -337,7 +358,7 @@
         #score-display {
             font-size: 1.5em;
             font-weight: bold;
-            margin: 10px 0;
+            margin: 0;
             color: #115ff4;
         }
 
@@ -347,6 +368,10 @@
 
         .incorrect-btn {
             background-color: #dc3545 !important;
+        }
+
+        .close-btn {
+            background-color: #6c757d !important;
         }
 
         .correct-btn:hover,
@@ -367,6 +392,7 @@
                 color: #ffffff;
                 font-weight: bold;
             }
+
             .header-cell {
                 font-size: 1.2em;
             }
@@ -377,10 +403,11 @@
 
 <body>
 
+    <div class="game-board-title">
+        <h1>Jeopardy!</h1>
+        <div id="score-display">Score: <span id="score">0</span></div>
+    </div>
     <!-- Jeopardy! Game Board -->
-    <h1>Jeopardy!</h1>
-    <div id="score-display">Score: <span id="score">0</span></div>
-
     <div id="game-board">
     </div>
 
