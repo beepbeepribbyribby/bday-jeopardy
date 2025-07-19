@@ -19,42 +19,9 @@
 
         //store for all the questions and answers
         const gameData = {
-            "Famous Lynns": {
-                "200": { question: "He began his music career in bands like Andicaps and the Chads, but ended up huge success out of the blue", answer: "Who is Jeff Lynne?" },
-                "400": { question: "This “Coal Miner’s Daughter” singer released 50 studio albums and was nominated for 18 Grammys winning 3", answer: "Who is Loretta Lynn?" },
-                "600": { question: "This Lynn was a 4 time Super Bowl champion as a wide receiver for the Pittsburgh Steelers playing from 1974-1982", answer: "Who is Lynn Swann?" },
-                "800": { question: "This songwriter, actor, filmmaker and rapper is one Oscar win away from holding EGOT status", answer: "Who is Lin-Manuel Miranda?" },
-                "1000": { question: "This English-American actress, who appeared in films like \"Georgy Girl\" and \"Shine,\" was once called stupid by Alex Trebek on Celebrity Jeopardy!", answer: "Who is Lynn Redgrave?<br><a target=\"_blank\" class=\"answer-link\" href=\"https://www.youtube.com/watch?v=P_KRprPr7t0\">Watch the clip here</a>" }
-            },
-            "Plants": {
-                "200": { question: "Not all nuts are nuts! Peanuts aren’t nuts they are", answer: "What are Legumes?" },
-                "400": { question: "During the 1600’s, Holland had a craze over this flower that was once more valuable than gold", answer: "What is the Tulip?" },
-                "600": { question: "It takes about 4,000 blooms of this plant to produce 1 ounce of this pricey spice from the same name", answer: "What is Saffron?" },
-                "800": { question: "This plant is the native shamans way to teach the people about the universe", answer: "What is Peyote?" },
-                "1000": { question: "This plant is the oldest living tree species dating back about 250 million years", answer: "What is the Ginkgo?" }
-            },
-            "1960": {
-                "200": { question: "The first televised presidential debate was September 26, 1960 between these two candidates", answer: "Who are Kennedy and Nixon?" },
-                "400": { question: "This actor who played Fox Mulder on The X-Files was born August 7, 1960", answer: "Who is David Duchovny?" },
-                "600": { question: "March 3, 1960 this musician returned home from Germany after 2 years of military service", answer: "Who is Elvis Presley?" },
-                "800": { question: "On May 6, 1960 President Eisenhower signed this to strengthen legislation to protect against discrimination", answer: "What is the Civil Rights Act?" },
-                "1000": { question: "The Beatles played their first public performance on August 15, 1960 at this Liverpool venue", answer: "What is the Jacaranda?" }
-            },
-            "Learning is Fungi": {
-                "200": { question: "<img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Trametes_versicolor_G4_%281%29.JPG/500px-Trametes_versicolor_G4_%281%29.JPG\">Name this not so fowl mushroom", answer: "What is Turkey tail?" },
-                "400": { question: "<img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Amanita_muscaria_3_vliegenzwammen_op_rij.jpg/500px-Amanita_muscaria_3_vliegenzwammen_op_rij.jpg\">Amanita muscaria is commonly associated with this holiday", answer: "What is Christmas?" },
-                "600": { question: "<img src=\"https://upload.wikimedia.org/wikipedia/commons/f/f4/Psilocybe.semilanceata.Alan.jpg\">Liberty Caps contain this psychoactive ingredient making them magic mushrooms", answer: "What is Psilocybin or Psilocin?" },
-                "800": { question: "<img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/ChampignonMushroom.jpg/500px-ChampignonMushroom.jpg\">The most common edible mushrooms in North America are these, but you won't find them on a dress shirt", answer: "What are White Button Mushrooms?" },
-                "1000": { question: "<img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Cordyceps.jpg/500px-Cordyceps.jpg\">These fungi are parasitic to insects ", answer: "What are Cordyceps?" },
-            },
-            "Before and After": {
-                "200": { question: "\"International\" cocoa concoction for female muppet", answer: "Who is Swiss Miss Piggy?" },
-                "400": { question: "Golf short game practice area served up in the title of a Dr. Seuss book", answer: "What is a putting Green Eggs and Ham?" },
-                "600": { question: "Team rope-pulling contest that becomes a Tolstoy novel", answer: "What is tug-of-War and Peace?" },
-                "800": { question: "Folk trio that was \"Blowin' In The Wind\" with the writer of \"Frankenstein\"", answer: "Who is Peter, Paul and Mary Shelley?" },
-                "1000": { question: "\"Lucille\"-strumming blues guitarist who reigned as a boy king of Egypt", answer: "Who is  B.B. King Tut?" }
-            },
-            // Additional categories and questions can be added here
+            "Double albums": {
+                "Final Jeopardy!": { question: "Track 1 Side 3 of this 1968 release was \"made up on the spot and recorded all in the same evening\"", answer: "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/dhdOPhTHeoE?si=SSvscV0tkUSkhzZq\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>" },
+            }
         };
 
         // Function to create the game board
@@ -62,14 +29,10 @@
 
             const gameBoard = document.getElementById("game-board");
             const categoryOrder = [
-                "1960",
-                "Plants",
-                "Famous Lynns",
-                "Before and After",
-                "Learning is Fungi",
+                "Double albums",
             ];
 
-            const pointValues = ["200", "400", "600", "800", "1000"];
+            const pointValues = ["Final Jeopardy!",];
 
             // Create categories row
             const headerRow = document.createElement("div");
@@ -315,13 +278,13 @@
             flex: 1;
             min-width: 0;
             word-wrap: break-word;
+            height: 250px;
         }
 
         .question-cell {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 60px;
             font-weight: bold;
             font-size: 1.7em;
             color: gold;
