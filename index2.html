@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jeopardy!</title>
+    <title>Double Jeopardy!</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -19,33 +19,33 @@
 
         //store for all the questions and answers
         const gameData = {
-            "Famous Lynns": {
-                "200": { question: "He began his music career in bands like Andicaps and the Chads, but ended up huge success out of the blue", answer: "Who is Jeff Lynne?" },
-                "400": { question: "This “Coal Miner’s Daughter” singer released 50 studio albums and was nominated for 18 Grammys winning 3", answer: "Who is Loretta Lynn?" },
-                "600": { question: "This Lynn was a 4 time Super Bowl champion as a wide receiver for the Pittsburgh Steelers playing from 1974-1982", answer: "Who is Lynn Swann?" },
-                "800": { question: "This songwriter, actor, filmmaker and rapper is one Oscar win away from holding EGOT status", answer: "Who is Lin-Manuel Miranda?" },
-                "1000": { question: "This English-American actress, who appeared in films like \"Georgy Girl\" and \"Shine,\" was once called stupid by Alex Trebek on Celebrity Jeopardy!", answer: "Who is Lynn Redgrave?<br><a target=\"_blank\" class=\"answer-link\" href=\"https://www.youtube.com/watch?v=P_KRprPr7t0\">Watch the clip here</a>" }
+            "Potent Potables": {
+                "400": { question: "On a cold wintry night, warm up with a traditional hot buttered this drink", answer: "What is Rum?" },
+                "800": { question: "It's traditional to float 2 or 3 of these beans on top of Sambuca liqueur", answer: "What are Coffee Beans?" },
+                "1200": { question: "This brand of aromatic bitters is named for a town in Venezuela", answer: "What is Angostura?" },
+                "1600": { question: "Use vodka instead of rum in this pineapple cocktail & it's called a Chi Chi", answer: "What is a Piña Colada?" },
+                "2000": { question: "Michael Scott's favorite drink, the \"One of Everything\", featurs equal parts Scotch, Absinthe, Rum, Gin, Vermouth, Triple sec, and two packs of this brand name for sucralose", answer: "What is a Splenda?" },
             },
-            "Plants": {
-                "200": { question: "Not all nuts are nuts! Peanuts aren’t nuts they are", answer: "What are Legumes?" },
-                "400": { question: "During the 1600’s, Holland had a craze over this flower that was once more valuable than gold", answer: "What is the Tulip?" },
-                "600": { question: "It takes about 4,000 blooms of this plant to produce 1 ounce of this pricey spice from the same name", answer: "What is Saffron?" },
-                "800": { question: "This plant is the native shamans way to teach the people about the universe", answer: "What is Peyote?" },
-                "1000": { question: "This plant is the oldest living tree species dating back about 250 million years", answer: "What is the Ginkgo?" }
+            "Fun Farm": {
+                "400": { question: "Vermicomposting uses these annelids, particularly red wigglers, to aid in organic farming", answer: "What are Earthworms?" },
+                "800": { question: "Putting \"wheel\" in front of this word makes it a helpful farm item; otherwise, it's just a term for a castrated pig", answer: "What is Barrow?" },
+                "1200": { question: "This branch of agriculture is the science of raising farmyard animals; sounds like matrimony is involved", answer: "What is Animal Husbandry?" },
+                "1600": { question: "It can be a low cupboard with shelves or a coop for animals, usually rabbits", answer: "What is Hutch?" },
+                "2000": { question: " In \"Animal Farm\", this large & in charge pig was based on Stalin", answer: "Who is Napoleon?" }
             },
-            "1960": {
-                "200": { question: "The first televised presidential debate was September 26, 1960 between these two candidates", answer: "Who are Kennedy and Nixon?" },
-                "400": { question: "This actor who played Fox Mulder on The X-Files was born August 7, 1960", answer: "Who is David Duchovny?" },
-                "600": { question: "March 3, 1960 this musician returned home from Germany after 2 years of military service", answer: "Who is Elvis Presley?" },
-                "800": { question: "On May 6, 1960 President Eisenhower signed this to strengthen legislation to protect against discrimination", answer: "What is the Civil Rights Act?" },
-                "1000": { question: "The Beatles played their first public performance on August 15, 1960 at this Liverpool venue", answer: "What is the Jacaranda?" }
+            "Movies": {
+                "400": { question: "Forgotten by his family, young Kevin watches the film \"Angels with Filthy Souls\" on VHS in this movie", answer: "What is Home Alone?" },
+                "800": { question: "This funnyman got some respect going \"Back to School\" at Grand Lakes U., I tell ya", answer: "Who is Rodney Dangerfield?" },
+                "1200": { question: "Set in the Wyoming Territory in 1889, the film follows the titular character, a gunfighter with a mysterious past who becomes embroiled in a conflict between poor homesteaders and wealthy ranchers.", answer: "What is Shane?" },
+                "1600": { question: "While staying in a hotel Forest Gump unwittingly exposes this scandal", answer: "What is Watergate?" },
+                "2000": { question: "Bert & Ernie of\"Sesame Street\" are named after characters in this classic Christmas film", answer: "What is It's a Wonderful Life?" },
             },
-            "Learning is Fungi": {
-                "200": { question: "<img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Trametes_versicolor_G4_%281%29.JPG/500px-Trametes_versicolor_G4_%281%29.JPG\">Name this not so fowl mushroom", answer: "What is Turkey tail?" },
-                "400": { question: "<img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Amanita_muscaria_3_vliegenzwammen_op_rij.jpg/500px-Amanita_muscaria_3_vliegenzwammen_op_rij.jpg\">Amanita muscaria is commonly associated with this holiday", answer: "What is Christmas?" },
-                "600": { question: "<img src=\"https://upload.wikimedia.org/wikipedia/commons/f/f4/Psilocybe.semilanceata.Alan.jpg\">Liberty Caps contain this psychoactive ingredient making them magic mushrooms", answer: "What is Psilocybin or Psilocin?" },
-                "800": { question: "<img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/ChampignonMushroom.jpg/500px-ChampignonMushroom.jpg\">The most common edible mushrooms in North America are these, but you won't find them on a dress shirt", answer: "What are White Button Mushrooms?" },
-                "1000": { question: "<img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Cordyceps.jpg/500px-Cordyceps.jpg\">These fungi are parasitic to insects ", answer: "What are Cordyceps?" },
+            "Rhyme Time": {
+                "400": { question: "A less risky thin cracker", answer: "What is a Safe Wafer?" },
+                "800": { question: "An money-less British man, fellow or guy", answer: "What is a Broke Bloke?" },
+                "1200": { question: "Multi-directional sound reproduction from a black bird", answer: "What is Stereo Crow?" },
+                "1600": { question: "A Lakota evaluation of a past performance", answer: "What is Sioux Review?" },
+                "2000": { question: "Someone more rapid of movement when he begins fly fishing", answer: "What is Faster Cast?" }
             },
             "Before and After": {
                 "200": { question: "\"International\" cocoa concoction for female muppet", answer: "Who is Swiss Miss Piggy?" },
@@ -62,14 +62,14 @@
 
             const gameBoard = document.getElementById("game-board");
             const categoryOrder = [
-                "1960",
-                "Plants",
-                "Famous Lynns",
-                "Before and After",
+                "Potent Potables",
+                "Fun Farm",
+                "Movies",
+                "Rhyme Time",
                 "Learning is Fungi",
             ];
 
-            const pointValues = ["200", "400", "600", "800", "1000"];
+            const pointValues = ["400", "800", "1200", "1600", "2000"];
 
             // Create categories row
             const headerRow = document.createElement("div");
@@ -458,7 +458,7 @@
 <body>
 
     <div class="game-board-title">
-        <h1>Jeopardy!</h1>
+        <h1>Double Jeopardy!</h1>
         <div id="score-display">Score: <span id="score">0</span></div>
     </div>
     <!-- Jeopardy! Game Board -->
